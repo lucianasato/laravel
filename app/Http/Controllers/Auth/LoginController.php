@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use LaravelLegends\PtBrValidator\Validator;
 
 class LoginController extends Controller
 {
@@ -61,5 +62,47 @@ class LoginController extends Controller
             return redirect('/admin/login');
         }
         return redirect('/login');
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    protected function credentials(Request $request)
+    {
+        $data = $request->only($this->username(),'password');
+        $loginField = $this->getLoginField();
+
+        if ($loginField != $this->username()) {
+            $data[$this->getLoginField()] = $data[$this->username()];
+            unset($data[$this->username()]);
+        }
+
+        return $data;
+    }
+
+    /**
+     * Validates phone, cpf and email in login
+     *
+     * @return string
+     */
+    protected function getLoginField()
+    {
+        $loginField = \Request::get('email');
+
+        $validator = \Validator::make(
+            ['telefone' => $loginField],
+            ['telefone' => 'required|celular_com_ddd']
+        );
+
+        if (!$validator->fails()) {
+            return 'phone';
+        }
+
+        if (is_numeric($loginField)) {
+            return 'cpf';
+        }
+
+        return 'email';
     }
 }

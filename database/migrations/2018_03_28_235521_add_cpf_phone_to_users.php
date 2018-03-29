@@ -15,7 +15,7 @@ class AddCpfPhoneToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('cpf', 11)->default('');
-            $table->string('phone')->default('');
+            $table->string('phone', 14)->default('');
         });
     }
 

@@ -14,13 +14,14 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\User::class, function (Faker $faker) {
+    $faker = \Faker\Factory::create('pt_BR');
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'password' => \Illuminate\Support\Facades\Hash::make('123456'), // secret
         'remember_token' => str_random(10),
         'cpf' => str_random(11),
-        'phone' => $faker->phoneNumber,
+        'phone' => str_replace(' ', '', $faker->phoneNumber)
     ];
 });
 
