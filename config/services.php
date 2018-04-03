@@ -38,7 +38,13 @@ return [
     'github' => [
         'client_id' => env('GITHUB_CLIENT_ID'),
         'client_secret' => env('GITHUB_CLIENTE_SECRET'),
-        'redirect' => env('GITHUB_CALLBACK'),
+        'redirect' => env('SOCIAL_LOGIN_CALLBACK'),
+    ],
+
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENTE_SECRET'),
+        'redirect' => env('SOCIAL_LOGIN_CALLBACK'),
     ],
 
 ];

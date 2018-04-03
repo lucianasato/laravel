@@ -62,14 +62,25 @@
                         </div>
                     </form>
 
-                    <form class="form-inline" method="post" action="{{ url('/login/social') }}">
-                        {{ csrf_field() }}
-                        <div class="col-md-12 text-center">
-                            <button type="submit" class="btn" value="github" name="social_type">
-                                {{ __('Login with Github') }}
-                            </button>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <form class="form-inline" method="post" action="{{ url('/login/social') }}">
+                                    {{ csrf_field() }}
+                                    <div class="col-md-6 text-center">
+                                        <button type="submit" class="btn" value="github" name="social_type">
+                                            {{ __('Login with Github') }}
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <button type="submit" class="btn btn-danger" value="google" name="social_type">
+                                            {{ __('Login with Google') }}
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

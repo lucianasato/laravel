@@ -112,7 +112,7 @@ class LoginController extends Controller
     public function loginSocial(Request $request)
     {
         $this->validate($request, [
-            'social_type' => 'required|in:github'
+            'social_type' => 'required|in:github,google'
         ]);
 
         $socialType = $request->get('social_type');
