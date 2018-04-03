@@ -9,8 +9,9 @@
         "caouecs/laravel-lang": "~3.0",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.6.*",
+        "laravel/socialite": "^3.0",
         "laravel/tinker": "^1.0",
-        "laravellegends/pt-br-validator" : "5.1.*"
+        "laravellegends/pt-br-validator": "5.1.*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.4",
@@ -53,6 +54,16 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
+        ],
+        "post-install-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:meta"
+        ],
+        "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:meta"
         ]
     },
     "config": {

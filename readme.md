@@ -5,3 +5,5 @@
 Copy the folder vendor/caoues/laravel-lang/src/pt-BR to resources/lang
 
 - [LaravelLegends/pt-br-validator](https://github.com/LaravelLegends/pt-br-validator)
+
+- [Laravel/Socialite](https://github.com/laravel/socialite)

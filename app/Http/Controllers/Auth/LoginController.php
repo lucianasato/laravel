@@ -105,4 +105,46 @@ class LoginController extends Controller
 
         return 'email';
     }
+
+    /**
+     * @param Request $request
+     */
+    public function loginSocial(Request $request)
+    {
+        $this->validate($request, [
+            'social_type' => 'required|in:github'
+        ]);
+
+        $socialType = $request->get('social_type');
+        \Session::put('social_type', $socialType);
+
+        return \Socialite::driver($socialType)->redirect();
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function loginCallback()
+    {
+        $socialType = \Session::pull('social_type');
+
+        $userSocial = \Socialite::driver($socialType)->user();
+
+        $user = User::where('email', $userSocial->email)->first();
+
+        if (!$user) {
+            $user = User::create([
+                'name' => $userSocial->name,
+                'email' => $userSocial->email,
+                'password' => bcrypt(str_random(8)),
+                'role' => User::ROLE_USER,
+                'phone' => '0000-0001',
+                'cpf' => '000.000.000-01',
+            ]);
+        }
+
+        \Auth::login($user);
+
+        return redirect()->intended($this->redirectPath());
+    }
 }
