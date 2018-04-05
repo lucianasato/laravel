@@ -36,10 +36,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
 
     Route::group(['middleware' => 'can:admin'], function() {
         Route::get('/home', 'HomeController@index')->name('home');
+        $this->resource('products', 'ProductController', ['only' => ['index']]);
     });
 
     $this->post('/login/social', 'Auth\LoginController@loginSocial');
     $this->get('/login/callback', 'Auth\LoginController@loginCallback');
 
-    $this->resource('products', 'ProductController', ['only' => ['index']]);
 });
