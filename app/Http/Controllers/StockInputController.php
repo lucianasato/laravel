@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\StockGreatherMaximum;
 use App\Product;
 use App\StockInput;
 use Illuminate\Http\Request;
@@ -33,7 +34,12 @@ class StockInputController extends Controller
     public function store(Request $request)
     {
         $data = array_except($request->all(), '_token');
-        StockInput::forceCreate($data);
+        $input = StockInput::forceCreate($data);
+        $product = $input->product;
+
+        if ($product->stock >= $product->stock_maximum) {
+            \Mail::to('stock@stock.com')->send(new StockGreatherMaximum($product));
+        }
         return redirect()->route('admin.stock-input.index');
     }
 }
