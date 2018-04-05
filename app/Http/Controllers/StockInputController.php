@@ -34,12 +34,7 @@ class StockInputController extends Controller
     public function store(Request $request)
     {
         $data = array_except($request->all(), '_token');
-        $input = StockInput::forceCreate($data);
-        $product = $input->product;
-
-        if ($product->stock >= $product->stock_maximum) {
-            \Mail::to('stock@stock.com')->send(new StockGreatherMaximum($product));
-        }
+        StockInput::forceCreate($data);
         return redirect()->route('admin.stock-input.index');
     }
 }
