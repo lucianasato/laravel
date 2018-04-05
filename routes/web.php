@@ -37,6 +37,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
     Route::group(['middleware' => 'can:admin'], function() {
         Route::get('/home', 'HomeController@index')->name('home');
         $this->resource('products', 'ProductController', ['only' => ['index']]);
+        $this->resource('stock-input', 'StockInputController', ['only' => ['index', 'create', 'store']]);
     });
 
     $this->post('/login/social', 'Auth\LoginController@loginSocial');
