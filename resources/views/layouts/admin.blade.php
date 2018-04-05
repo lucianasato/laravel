@@ -27,8 +27,11 @@
             <a class="navbar-brand" href="{{ route('admin.home') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
-            <a class="navbar-brand" href="{{route('admin.products.index')}}">Produtos</a>
-            <a class="navbar-brand" href="{{route('admin.stock-input.index')}}">Entradas de Estoque</a>
+            @auth
+                <a class="navbar-brand" href="{{route('admin.products.index')}}">Produtos</a>
+                <a class="navbar-brand" href="{{route('admin.stock-input.index')}}">Entradas de Estoque</a>
+                <a class="navbar-brand" href="{{route('admin.stock-output.index')}}">Saídas de Estoque</a>
+            @endauth
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
