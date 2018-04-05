@@ -40,4 +40,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
 
     $this->post('/login/social', 'Auth\LoginController@loginSocial');
     $this->get('/login/callback', 'Auth\LoginController@loginCallback');
+
+    $this->resource('products', 'ProductController', ['only' => ['index']]);
 });
