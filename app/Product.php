@@ -2,12 +2,12 @@
 
 namespace App;
 
-use App\Events\ProductUpdating;
+use App\Events\ProductUpdated;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
     protected $dispatchesEvents = [
-        'updating' => ProductUpdating::class
+        'updating' => ProductUpdated::class
     ];
 }

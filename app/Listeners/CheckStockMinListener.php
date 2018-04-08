@@ -3,9 +3,11 @@
 namespace App\Listeners;
 
 use App\Events\ProductUpdated;
-use App\Mail\StockGreatherMaximum;
+use App\Mail\StockLessMinimum;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class CheckStockMaxListener
+class CheckStockMinListener
 {
     /**
      * Handle the event.
@@ -16,8 +18,8 @@ class CheckStockMaxListener
     public function handle(ProductUpdated $event)
     {
         $product = $event->getProduct();
-        if ($product->stock >= $product->stock_maximum) {
-            \Mail::to('stock@stock.com')->send(new StockGreatherMaximum($product));
+        if ($product->stock < ($product->stock_maximum*0.1)) {
+            \Mail::to('stock@stock.com')->send(new StockLessMinimum($product));
         }
     }
 }

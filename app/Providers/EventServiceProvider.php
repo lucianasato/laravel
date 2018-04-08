@@ -16,8 +16,12 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\StockInputCreated' => [
             'App\Listeners\IncrementStockListener',
         ],
-        'App\Events\ProductUpdating' => [
+        'App\Events\StockOutputCreated' => [
+            'App\Listeners\DecrementStockListener',
+        ],
+        'App\Events\ProductUpdated' => [
             'App\Listeners\CheckStockMaxListener',
+            'App\Listeners\CheckStockMinListener',
         ],
     ];
 

@@ -4,7 +4,7 @@ namespace App\Events;
 
 use App\Product;
 
-class ProductUpdating
+class ProductUpdated
 {
     private $product;
 
